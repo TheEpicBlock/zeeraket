@@ -4,8 +4,10 @@
 // Include resources in the jar (very javascript-esque)
 #include "build/resources.c"
 
-typedef struct MojangBlockSettings __attribute__((address_space(1))) * MojangBlockSettings_t;
 typedef struct MojangBlock __attribute__((address_space(1))) * MojangBlock_t;
+typedef struct MojangBlockSettings __attribute__((address_space(1))) * MojangBlockSettings_t;
+typedef struct MojangItem __attribute__((address_space(1))) * MojangItem_t;
+typedef struct MojangItemSettings __attribute__((address_space(1))) * MojangItemSettings_t;
 typedef struct MojangRegistry __attribute__((address_space(1))) * MojangRegistry_t;
 typedef struct MojangRegistryKey __attribute__((address_space(1))) * MojangRegistryKey_t;
 typedef struct MojangIdentifier __attribute__((address_space(1))) * MojangIdentifier_t;
@@ -13,6 +15,17 @@ typedef struct JavaLangString __attribute__((address_space(1))) * JavaLangString
 typedef struct JavaLangObject __attribute__((address_space(1))) * JavaLangObject_t;
 typedef struct JavaLangStringBuilder __attribute__((address_space(1))) * StringBuilder_t;
 
+// new Item.Settings()
+MojangItemSettings_t jvlm_extern_new__net_minecraft_class\u022C1792$class\u022C1793();
+// Item$Settings.<init>()
+void jvlm_extern_invokespecial__net_minecraft_class\u022C1792$class\u022C1793_\u022Ainit\u022B(MojangItemSettings_t this);
+// Item$Settings.registryKey
+#define Item$Settings$registryKey jvlm_extern_invokevirtual__net_minecraft_class\u022C1792$class\u022C1793_method\u022C63686$jvlm_param$net_minecraft_class\u022C5321\u0229net_minecraft_class\u022C1792$class\u022C1793
+MojangItemSettings_t Item$Settings$registryKey(MojangItemSettings_t this, MojangRegistryKey_t key);
+// new BlockItem
+MojangItem_t jvlm_extern_new__net_minecraft_class\u022C1747();
+// BlockItem.<init>()
+void jvlm_extern_invokespecial__net_minecraft_class\u022C1747_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C2248\u0229net_minecraft_class\u022C1792$class\u022C1793(MojangItem_t this, MojangBlock_t block, MojangItemSettings_t settings);
 // new Block
 MojangBlock_t jvlm_extern_new__net_minecraft_class\u022C2248();
 // Block.<init>()
@@ -20,6 +33,9 @@ void jvlm_extern_invokespecial__net_minecraft_class\u022C2248_\u022Ainit\u022B$j
 // AbstractBlock.Settings.copy()
 #define blockSettingsFromCopy jvlm_extern__net_minecraft_class\u022C4970$class\u022C2251_method\u022C9630$jvlm_param$net_minecraft_class\u022C4970\u0229net_minecraft_class\u022C4970$class\u022C2251
 MojangBlockSettings_t blockSettingsFromCopy(MojangBlock_t block);
+// AbstractBlock.Settings.registryKey()
+#define blockSettingsSetKey jvlm_extern_invokevirtual__net_minecraft_class\u022C4970$class\u022C2251_method\u022C63500$jvlm_param$net_minecraft_class\u022C5321\u0229net_minecraft_class\u022C4970$class\u022C2251
+MojangBlockSettings_t blockSettingsSetKey(MojangBlockSettings_t this, MojangRegistryKey_t key);
 // new StringBuilder
 StringBuilder_t jvlm_extern_new__java_lang_StringBuilder();
 // StringBuilder.<init>()
@@ -42,6 +58,10 @@ MojangIdentifier_t createIdentifier(JavaLangString_t a, JavaLangString_t b);
 extern MojangRegistry_t REGISTRY$BLOCK;
 #define REGISTRYKEYS$BLOCK jvlm__net_minecraft_class\u022C7924_field\u022C41254$jvlm_param$net_minecraft_class\u022C5321
 extern MojangRegistryKey_t REGISTRYKEYS$BLOCK;
+#define REGISTRY$ITEM jvlm__net_minecraft_class\u022C7923_field\u022C41178$jvlm_param$net_minecraft_class\u022C7922
+extern MojangRegistry_t REGISTRY$ITEM;
+#define REGISTRYKEYS$ITEM jvlm__net_minecraft_class\u022C7924_field\u022C41197$jvlm_param$net_minecraft_class\u022C5321
+extern MojangRegistryKey_t REGISTRYKEYS$ITEM;
 #define LILY_OF_THE_VALLEY jvlm__net_minecraft_class\u022C2246_field\u022C10548$jvlm_param$net_minecraft_class\u022C2248
 extern MojangBlock_t LILY_OF_THE_VALLEY;
 
@@ -67,13 +87,30 @@ static MojangBlock_t newBlock(MojangBlockSettings_t settings) {
     jvlm_extern_invokespecial__net_minecraft_class\u022C2248_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251(block, settings);
     return block;
 }
+#define newBlockItem newBlockItem$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251\u0229net_minecraft_class\u022C2248
+static MojangItem_t newBlockItem(MojangBlock_t block, MojangItemSettings_t settings) {
+    MojangItem_t item = jvlm_extern_new__net_minecraft_class\u022C1747();
+    jvlm_extern_invokespecial__net_minecraft_class\u022C1747_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C2248\u0229net_minecraft_class\u022C1792$class\u022C1793(item, block, settings);
+    return item;
+}
+#define itemSettingsFromRegistryKey itemSettingsFromRegistryKey$jvlm_param$net_minecraft_class\u022C2248\u0229net_minecraft_class\u022C4970$class\u022C2251
+static MojangItemSettings_t itemSettingsFromRegistryKey(MojangRegistryKey_t key) {
+    MojangItemSettings_t settings = jvlm_extern_new__net_minecraft_class\u022C1792$class\u022C1793();
+    jvlm_extern_invokespecial__net_minecraft_class\u022C1792$class\u022C1793_\u022Ainit\u022B(settings);
+    settings = Item$Settings$registryKey(settings, key);
+    return settings;
+}
 
 void zeeraket_onInitialize() {
     JavaLangString_t modName = makeString("zeeraket");
     JavaLangString_t blockName = makeString("cakile_maritima");
     MojangIdentifier_t identifier = createIdentifier(modName, blockName);
-    MojangRegistryKey_t key = registryKey(REGISTRYKEYS$BLOCK, identifier);
+    MojangRegistryKey_t blockKey = registryKey(REGISTRYKEYS$BLOCK, identifier);
+    MojangRegistryKey_t itemKey = registryKey(REGISTRYKEYS$ITEM, identifier);
 
-    MojangBlock_t block = newBlock(blockSettingsFromCopy(LILY_OF_THE_VALLEY));
-    registryRegister(REGISTRY$BLOCK, key, (JavaLangObject_t)block);
+    MojangBlockSettings_t bSettings = blockSettingsFromCopy(LILY_OF_THE_VALLEY);
+    MojangBlock_t block = newBlock(blockSettingsSetKey(bSettings, blockKey));
+    MojangItem_t item = newBlockItem(block, itemSettingsFromRegistryKey(itemKey));
+    registryRegister(REGISTRY$BLOCK, blockKey, (JavaLangObject_t)block);
+    registryRegister(REGISTRY$ITEM, itemKey, (JavaLangObject_t)item);
 }
