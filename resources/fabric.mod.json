@@ -21,6 +21,9 @@
   "entrypoints": {
     "main": [
       "jvlm.zeeraket_onInitialize::zeeraket_onInitialize"
+    ],
+    "client": [
+      "jvlm.zeeraket_onInitializeClient::zeeraket_onInitializeClient"
     ]
   },
   "mixins": [

@@ -11,9 +11,11 @@ typedef struct MojangItemSettings __attribute__((address_space(1))) * MojangItem
 typedef struct MojangRegistry __attribute__((address_space(1))) * MojangRegistry_t;
 typedef struct MojangRegistryKey __attribute__((address_space(1))) * MojangRegistryKey_t;
 typedef struct MojangIdentifier __attribute__((address_space(1))) * MojangIdentifier_t;
+typedef struct MojangRenderLayer __attribute__((address_space(1))) * MojangRenderLayer_t;
 typedef struct JavaLangString __attribute__((address_space(1))) * JavaLangString_t;
 typedef struct JavaLangObject __attribute__((address_space(1))) * JavaLangObject_t;
 typedef struct JavaLangStringBuilder __attribute__((address_space(1))) * StringBuilder_t;
+typedef struct BlockRenderLayerMap __attribute__((address_space(1))) * BlockRenderLayerMap_t;
 
 // new Item.Settings()
 MojangItemSettings_t jvlm_extern_new__net_minecraft_class\u022C1792$class\u022C1793();
@@ -53,6 +55,12 @@ MojangRegistryKey_t registryKey(MojangRegistryKey_t registry, MojangIdentifier_t
 // Identifier.of(string, string)
 #define createIdentifier jvlm_extern__net_minecraft_class\u022C2960_method\u022C60655$jvlm_param$java_lang_String\u0229java_lang_String\u0229net_minecraft_class\u022C2960
 MojangIdentifier_t createIdentifier(JavaLangString_t a, JavaLangString_t b);
+// BlockRenderLayerMap.putBlock
+#define brlm_putBlock jvlm_extern_invokeinterface__net_fabricmc_fabric_api_blockrenderlayer_v1_BlockRenderLayerMap_putBlock$jvlm_param$net_minecraft_class\u022C2248\u0229net_minecraft_class\u022C1921
+void brlm_putBlock(BlockRenderLayerMap_t this, MojangBlock_t block, MojangRenderLayer_t render_layer);
+// Renderlayer.getCutout
+#define renderlayer_getCutout jvlm_extern__net_minecraft_class\u022C1921_method\u022C23581$jvlm_param$net_minecraft_class\u022C1921
+MojangRenderLayer_t renderlayer_getCutout();
 
 #define REGISTRY$BLOCK jvlm__net_minecraft_class\u022C7923_field\u022C41175$jvlm_param$net_minecraft_class\u022C7922
 extern MojangRegistry_t REGISTRY$BLOCK;
@@ -64,6 +72,8 @@ extern MojangRegistry_t REGISTRY$ITEM;
 extern MojangRegistryKey_t REGISTRYKEYS$ITEM;
 #define LILY_OF_THE_VALLEY jvlm__net_minecraft_class\u022C2246_field\u022C10548$jvlm_param$net_minecraft_class\u022C2248
 extern MojangBlock_t LILY_OF_THE_VALLEY;
+#define BLOCKRENDERLAYERMAP$INSTANCE jvlm__net_fabricmc_fabric_api_blockrenderlayer_v1_BlockRenderLayerMap_INSTANCE$jvlm_param$net_fabricmc_fabric_api_blockrenderlayer_v1_BlockRenderLayerMap
+extern BlockRenderLayerMap_t BLOCKRENDERLAYERMAP$INSTANCE;
 
 #define makeString makeString$jvlm_param$java_lang_String
 static JavaLangString_t makeString(char * input) {
@@ -101,6 +111,9 @@ static MojangItemSettings_t itemSettingsFromRegistryKey(MojangRegistryKey_t key)
     return settings;
 }
 
+#define cakile_block cakile_block$jvlm_param$net_minecraft_class\u022C2248
+static MojangBlock_t cakile_block;
+
 void zeeraket_onInitialize() {
     JavaLangString_t modName = makeString("zeeraket");
     JavaLangString_t blockName = makeString("cakile_maritima");
@@ -112,5 +125,10 @@ void zeeraket_onInitialize() {
     MojangBlock_t block = newBlock(blockSettingsSetKey(bSettings, blockKey));
     MojangItem_t item = newBlockItem(block, itemSettingsFromRegistryKey(itemKey));
     registryRegister(REGISTRY$BLOCK, blockKey, (JavaLangObject_t)block);
+    cakile_block = block;
     registryRegister(REGISTRY$ITEM, itemKey, (JavaLangObject_t)item);
+}
+
+void zeeraket_onInitializeClient() {
+    brlm_putBlock(BLOCKRENDERLAYERMAP$INSTANCE, cakile_block, renderlayer_getCutout());
 }
