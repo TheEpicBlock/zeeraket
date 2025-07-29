@@ -15,17 +15,20 @@ build/llvm_ir.bc: $(wildcard *.c) build/resources.c
 
 resources = $(shell find resources -type f -print)
 build/resources.c: $(patsubst %,build/%.c,$(resources))
-	echo '$(foreach f,$(resources),__attribute((annotate(("jvlm::include_as_resource($(patsubst resources/%,%,$(f)))"))))\n#include "$(f).c"\n)' > $@
+	@echo '$(foreach f,$(resources),__attribute((annotate(("jvlm::include_as_resource($(patsubst resources/%,%,$(f)))"))))\n#include "$(f).c"\n)' > $@
 
 
 build/resources/%.c: resources/%
 	mkdir -p $(dir $@)
-ifeq ($(patsubst %/lang,,$(lastword $(dir $<))),)
-	# Custom processing for lang files. We add an "item" key for each "block" key
-	cat $< | jq -c 'to_entries | map([., {key: .key | sub("^block"; "item"), value: .value}]) | flatten | from_entries' | xxd -i -n $(notdir $<) > $@
-else
-	cat $< | envsubst '$${VERSION}' | xxd -i -n $(notdir $<) > $@
-endif
+	@# In order:
+	@# - if the file is in lang/, we process it and automatically generate "item" keys for any "block" key
+	@# - if the file is .json, we minify it
+	@# - if the file is .mod.json, we substitute the VERSION environment variable
+	cat $< \
+		$(if $(patsubst %/lang/,,$(dir $<)),, | jq 'to_entries | map([., {key: .key | sub("^block"; "item"), value: .value}]) | flatten | from_entries') \
+		$(if $(patsubst %.json,,$(dir $<)),, | jq -c '.') \
+		$(if $(patsubst %.mod.json,,$(dir $<)),, | envsubst '$${VERSION}') \
+		| xxd -i -n "$<" > $@
 
 build/resources/assets/zeeraket/lang/%.c: resources/assets/zeeraket/lang/%.json
 	mkdir -p $(dir $@)
