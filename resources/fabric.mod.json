@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "zeeraket",
+  "version": "${VERSION}",
+
+  "name": "Zeeraket",
+  "description": "Zeeraket (Cakile maritima)",
+  "authors": [
+    "TheEpicBlock"
+  ],
+  "contact": {
+    "homepage": "https://github.com/TheEpicBlock/Zeeraket",
+    "issues": "https://github.com/TheEpicBlock/Zeeraket/issues",
+    "sources": "https://github.com/TheEpicBlock/Zeeraket"
+  },
+
+  "license": "",
+  "icon": "assets/zeeraket/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "jvlm.zeeraket_onInitialize::zeeraket_onInitialize"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "minecraft": "*",
+    "java": ">=21"
+  },
+  "suggests": {
+  },
+  "breaks": {
+  }
+}
