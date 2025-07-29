@@ -13,7 +13,7 @@ build/llvm_ir.bc: $(wildcard *.c) build/resources.c
 	mkdir -p build
 	${CC} ${CFLAGS} -emit-llvm -c $(wildcard *.c) -o build/llvm_ir.bc
 
-resources = $(wildcard resources/**)
+resources = $(shell find resources -type f -print)
 build/resources.c: $(patsubst %,build/%.c,$(resources))
 	echo '$(foreach f,$(resources),__attribute((annotate(("jvlm::include_as_resource($(patsubst resources/%,%,$(f)))"))))\n#include "$(f).c"\n)' > $@
 
