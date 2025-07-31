@@ -13,7 +13,7 @@
         "issues": "https://github.com/TheEpicBlock/Zeeraket/issues",
         "sources": "https://github.com/TheEpicBlock/Zeeraket"
     },
-    "license": "",
+    "license": "MIT",
     "icon": "assets/zeeraket/icon.png",
     "environment": "*",
     "entrypoints": {
