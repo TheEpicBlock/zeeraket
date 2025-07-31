@@ -1,6 +1,65 @@
 {
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "zeeraket:block/cakile_maritima"
-  }
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "zeeraket:block/cakile_maritima",
+		"1": "zeeraket:block/cakile_maritima_small",
+		"particle": "zeeraket:block/cakile_maritima"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 0],
+			"to": [8, 16, 16],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3.34315, 0, -1],
+			"to": [3.34315, 16, 15],
+			"rotation": {"angle": 45, "axis": "y", "origin": [9, 0, 7]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [12.65685, 0, -1],
+			"to": [12.65685, 16, 15],
+			"rotation": {"angle": -45, "axis": "y", "origin": [7, 0, 7]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [8, 0, 0],
+			"to": [8, 16, 16],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3.34315, 0, 1],
+			"to": [3.34315, 16, 17],
+			"rotation": {"angle": -45, "axis": "y", "origin": [9, 0, 9]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [12.65685, 0, 1],
+			"to": [12.65685, 16, 17],
+			"rotation": {"angle": 45, "axis": "y", "origin": [7, 0, 9]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#1"}
+			}
+		}
+	]
 }
