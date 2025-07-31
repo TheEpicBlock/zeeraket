@@ -1,41 +1,37 @@
 {
-  "schemaVersion": 1,
-  "id": "zeeraket",
-  "version": "${VERSION}",
+    "schemaVersion": 1,
+    "id": "zeeraket",
+    "version": "${VERSION}",
 
-  "name": "Zeeraket",
-  "description": "Zeeraket (Cakile maritima)",
-  "authors": [
-    "TheEpicBlock"
-  ],
-  "contact": {
-    "homepage": "https://github.com/TheEpicBlock/Zeeraket",
-    "issues": "https://github.com/TheEpicBlock/Zeeraket/issues",
-    "sources": "https://github.com/TheEpicBlock/Zeeraket"
-  },
-
-  "license": "",
-  "icon": "assets/zeeraket/icon.png",
-
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "jvlm.zeeraket_onInitialize::zeeraket_onInitialize"
+    "name": "Zeeraket",
+    "description": "Zeeraket (Cakile maritima)",
+    "authors": [
+        "TheEpicBlock"
     ],
-    "client": [
-      "jvlm.zeeraket_onInitializeClient::zeeraket_onInitializeClient"
-    ]
-  },
-  "mixins": [
-  ],
-  "depends": {
-    "fabricloader": ">=0.15.11",
-    "fabric-api": "*",
-    "minecraft": "*",
-    "java": ">=21"
-  },
-  "suggests": {
-  },
-  "breaks": {
-  }
+    "contact": {
+        "homepage": "https://github.com/TheEpicBlock/Zeeraket",
+        "issues": "https://github.com/TheEpicBlock/Zeeraket/issues",
+        "sources": "https://github.com/TheEpicBlock/Zeeraket"
+    },
+    "license": "",
+    "icon": "assets/zeeraket/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "jvlm.zeeraket_onInitialize::zeeraket_onInitialize"
+        ],
+        "client": [
+            "jvlm.zeeraket_onInitializeClient::zeeraket_onInitializeClient"
+        ]
+    },
+    "mixins": [
+    ],
+    "depends": {
+        "fabricloader": ">=0.15.11",
+        "fabric-api": "*",
+        "minecraft": "*",
+        "java": ">=21"
+    },
+    "suggests": { },
+    "breaks": {}
 }

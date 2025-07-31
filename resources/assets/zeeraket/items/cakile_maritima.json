@@ -1,6 +1,6 @@
 {
-  "model": {
-    "type": "minecraft:model",
-    "model": "zeeraket:item/cakile_maritima"
-  }
+    "model": {
+        "type": "minecraft:model",
+        "model": "zeeraket:item/cakile_maritima"
+    }
 }

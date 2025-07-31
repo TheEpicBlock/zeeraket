@@ -1,7 +1,7 @@
 {
-  "variants": {
-    "": {
-      "model": "zeeraket:block/cakile_maritima"
+    "variants": {
+        "": {
+            "model": "zeeraket:block/cakile_maritima"
+        }
     }
-  }
 }
