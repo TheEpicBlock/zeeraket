@@ -28,10 +28,10 @@ MojangItemSettings_t Item$Settings$registryKey(MojangItemSettings_t this, Mojang
 MojangItem_t jvlm_extern_new__net_minecraft_class\u022C1747();
 // BlockItem.<init>()
 void jvlm_extern_invokespecial__net_minecraft_class\u022C1747_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C2248\u0229net_minecraft_class\u022C1792$class\u022C1793(MojangItem_t this, MojangBlock_t block, MojangItemSettings_t settings);
-// new Block
-MojangBlock_t jvlm_extern_new__net_minecraft_class\u022C2248();
-// Block.<init>()
-void jvlm_extern_invokespecial__net_minecraft_class\u022C2248_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251(MojangBlock_t this, MojangBlockSettings_t settings);
+// new DryVegetationBlock
+MojangBlock_t jvlm_extern_new__net_minecraft_class\u022C2311();
+// DryVegetationBlock.<init>()
+void jvlm_extern_invokespecial__net_minecraft_class\u022C2311_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251(MojangBlock_t this, MojangBlockSettings_t settings);
 // AbstractBlock.Settings.copy()
 #define blockSettingsFromCopy jvlm_extern__net_minecraft_class\u022C4970$class\u022C2251_method\u022C9630$jvlm_param$net_minecraft_class\u022C4970\u0229net_minecraft_class\u022C4970$class\u022C2251
 MojangBlockSettings_t blockSettingsFromCopy(MojangBlock_t block);
@@ -93,8 +93,8 @@ static JavaLangString_t makeString(char * input) {
 
 #define newBlock newBlock$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251\u0229net_minecraft_class\u022C2248
 static MojangBlock_t newBlock(MojangBlockSettings_t settings) {
-    MojangBlock_t block = jvlm_extern_new__net_minecraft_class\u022C2248();
-    jvlm_extern_invokespecial__net_minecraft_class\u022C2248_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251(block, settings);
+    MojangBlock_t block = jvlm_extern_new__net_minecraft_class\u022C2311();
+    jvlm_extern_invokespecial__net_minecraft_class\u022C2311_\u022Ainit\u022B$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251(block, settings);
     return block;
 }
 #define newBlockItem newBlockItem$jvlm_param$net_minecraft_class\u022C4970$class\u022C2251\u0229net_minecraft_class\u022C2248
