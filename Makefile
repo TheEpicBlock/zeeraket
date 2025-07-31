@@ -27,8 +27,8 @@ build/resources/%.c: resources/%
 	@# Then we write the file in C format, and make the fields static so clang can potentially optimize them away
 	cat $< \
 		$(if $(patsubst %/lang/,,$(dir $<)),, | jq 'to_entries | map([., {key: .key | sub("^block"; "item"), value: .value}]) | flatten | from_entries') \
-		$(if $(patsubst %.json,,$(dir $<)),, | jq -c '.') \
-		$(if $(patsubst %.mod.json,,$(dir $<)),, | envsubst '$${VERSION}') \
+		$(if $(patsubst %.json,,$<),, | jq -c '.') \
+		$(if $(patsubst %.mod.json,,$<),, | envsubst '$${VERSION}') \
 		| xxd -i -n "$<" \
 		| sed "s/unsigned/static unsigned/" > $@
 
